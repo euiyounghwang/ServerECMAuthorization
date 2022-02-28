@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value = "%d %-5p - [%t]%C||%m%n"/>
+                <!--value="%p - %C{1}.%M(%L) | %m%n"/>-->
+        </layout>
+    </appender>
+
+    <appender name="FILEAPPENDER" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="true"/>
+        <param name="file" value="logs/HttpECMAuthorized.log"/>
+        <param name="maxFileSize" value="20MB"/>
+        <param name="maxBackupIndex" value="100"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d{MMM dd hh:mm:ss aa} %p - %C{1}.%M(%L) | %m%n"/>
+                <!--value = "%d %-5p - [%t]%C||%m%n/>-->
+        </layout>
+    </appender> 
+    <logger name="com.documentum">
+  		<level value="error"/>
+  			<appender-ref ref="FILEAPPENDER" />
+  	</logger>
+    <logger name="org.apache">
+        <level value="warn"/>
+    </logger>
+    
+    <root>
+        <level value="info"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILEAPPENDER"/>
+    </root>
+</log4j:configuration>
